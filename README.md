@@ -29,7 +29,6 @@ File: `tako_to_anki_own.py`
 3. Move the .csv file to be the same file location as `tako_to_anki_own.py`
 4. From within `tako_to_anki_own.py`, edit `INPUT_CSV` variable to match the name of the .csv file.
 5. Run `tako_to_anki_own.py`
-6. From Anki Desktop, select 'Import File' and select the desired output file to import into Anki.
 
 ### Reformatting Anki Cards Exported from Takoboto App (Recommended)
 
@@ -56,7 +55,23 @@ File: `tako_to_anki_reformat.py`
 5. Move the .csv file to be the same file location as `tako_to_anki_reformat.py`
 6. From within `tako_to_anki_reformat.py`, edit `INPUT_CSV` variable to match the name of the .csv file.
 7. Run `tako_to_anki_reformat.py`
-8. From Anki Desktop, select 'Import File' and select the desired output file to import into Anki.
+
+### Importing CSV files to Anki
+
+1. From the AnkiWeb homepage, select 'Import File' and select the desired output file to import into Anki.
+#### File
+2. Change 'Field separator' to 'Comma', and make sure the columns in the table preview look correct.
+3. Enable 'Allow HTML in fields'
+#### Import options
+4. Select the correct deck which the cards should be imported to under 'Deck'
+5. Under 'Existing notes', select 'Update' to replace already existing cards, 'Preserve' to avoid replacing already existing cards in the deck, or 'Duplicate' to create a second card if a card with the same word already exists.
+6. To tag all newly imported cards, type in a tag under 'Tag all notes', e.g., 'TAKOBOTO' (and under 'Tag updated notes' if you have 'Update' selected under 'Existing notes')
+#### Field mapping
+7. Ensure the correct columns from the table preview match the selections for the card 'Front', 'Back', and 'Tags'.
+
+8. Select 'Import' at the top of the screen.
+
+
 
 ## Planned future improvements
 - Change output CSV file generation to have words separated by tag names
