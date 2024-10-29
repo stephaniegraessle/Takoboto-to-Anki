@@ -5,24 +5,23 @@ I created this Python code for
 
 Feel free to change the code to fit your needs.
 
-## Instructions
+## Transferring Authored Takoboto lists to Anki
 
-### Transferring Authored Takoboto lists to Anki
-
-Requirements:
+### Requirements
+- `tako_to_anki_own.py`
 - Takoboto app
 - AnkiDroid or AnkiWeb
 
-Advantages:
+### Advantages
 - Do not need to have AnkiDroid app installed
 - Able to immediately download all 'Authored lists'
 - Contains all different readings of the word entries
 
-Limitations:
+### Limitations
 - Only includes 'Authored lists' created by yourself, does not include 'Downloaded lists'
 - Does not include additional information, e.g., example sentences
 
-File: `tako_to_anki_own.py`
+### Instructions
 
 1. Go to the word lists view in the Takoboto app (... > 'Lists of words')
 2. Export entire collection as a .csv file (... > 'Export to file...' > 'SAVE')
@@ -30,23 +29,24 @@ File: `tako_to_anki_own.py`
 4. From within `tako_to_anki_own.py`, edit `INPUT_CSV` variable to match the name of the .csv file.
 5. Run `tako_to_anki_own.py`
 
-### Reformatting Anki Cards Exported from Takoboto App (Recommended)
+## Reformatting Anki Cards Exported from Takoboto App (Recommended)
 
-Requirements:
+### Requirements
+- `tako_to_anki_reformat.py`
 - Takoboto App
 - AnkiDroid
 - AnkiWeb
 
-Advantages:
+### Advantages
 - Able to make/modify cards for 'Downloaded lists' as well as 'Authored
 - Contains additional information, e.g., example sentences.
 
-Limitations:
+### Limitations
 - Need to have AnkiDroid app installed
 - Can only export each deck one by one to AnkiDroid, which can be time consuming if you have many decks.
 - Only contains one reading of the 'head' Japanese word in the dictionary entry.
 
-File: `tako_to_anki_reformat.py`
+### Instructions
 
 1. Export own 'Authored lists' or 'Downloaded lists' from within the Takoboto app to AnkiDroid. (... > 'Lists of words' > Open a list > ... > 'Send to AnkiDroid')
 2. Download the 'Takoboto' deck from within AnkiDroid or Anki Desktop (Select a deck > 'Export deck' > Export format: 'Notes in Plain Text (.txt)'; Include: 'Takoboto') > 'OK')
@@ -56,7 +56,9 @@ File: `tako_to_anki_reformat.py`
 6. From within `tako_to_anki_reformat.py`, edit `INPUT_CSV` variable to match the name of the .csv file.
 7. Run `tako_to_anki_reformat.py`
 
-### Importing CSV files to Anki
+## Importing CSV files to Anki
+
+### Instructions
 
 1. From the AnkiWeb homepage, select 'Import File' and select the desired output file to import into Anki.
 #### File
@@ -74,4 +76,4 @@ File: `tako_to_anki_reformat.py`
 
 
 ## Planned future improvements
-- Change output CSV file generation to have words separated by tag names
+- Change output CSV file generation to have words separated into different files by their tag names
