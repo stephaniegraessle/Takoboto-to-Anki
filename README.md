@@ -1,7 +1,7 @@
 # Takoboto-to-Anki
-I created this Python code for
-1. Tranferring saved entries in [Takoboto Japanese dictionary](https://takoboto.jp/) to [Anki](https://apps.ankiweb.net/) as flashcards
-2. Modifying the format of cards imported to Anki from Takoboto into a format that I prefer
+I created this Python code to
+1. tranfer saved entries in [Takoboto Japanese dictionary](https://takoboto.jp/) to [Anki](https://apps.ankiweb.net/) as flashcards, and
+2. modify the format of cards imported to Anki from Takoboto into a more preferred format.
 
 Feel free to change the code to fit your needs.
 
