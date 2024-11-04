@@ -1,5 +1,6 @@
 import csv
 import re
+import os
 
 # TODO: Add a "~" to the head word if the definitions includes a suffix--separate by suffix and non-suffix entries?
 
@@ -10,6 +11,7 @@ import re
 # Change file names to match the names of the downloaded files
 INPUT_CSV = ['Takoboto.20241101-160953.csv', 'Takoboto - Sheet1.csv'] # [0,1]
 MAX_ROWS_PER_FILE = 2500
+OUTPUT_DIR = 'output' # Name of folder/directory for output CSV files
 
 with open(INPUT_CSV[0],'r') as csvfile:
     csv_reader = csv.reader(csvfile)
@@ -167,6 +169,9 @@ for i in range(len(fronts)):
 #print()
 #print(tags[:10])
 
+# Ensure the 'Output' directory exists
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 print("Writing to output CSV files...")
 if len(tags) == len(fronts) == len(backs):
     tag_files = {}  # Dictionary to track open files for each tag
@@ -174,7 +179,7 @@ if len(tags) == len(fronts) == len(backs):
     for i in range(len(fronts)):
         for tag in tags[i]:  # Each tag in the current entry
             if tag not in tag_files:
-                tag_files[tag] = open(f'output_{tag}.csv', 'w', newline='')
+                tag_files[tag] = open(os.path.join(OUTPUT_DIR, f'output_{tag}.csv'), 'w', newline='')
                 writer = csv.writer(tag_files[tag])
 
             # Write the data to the relevant file(s)

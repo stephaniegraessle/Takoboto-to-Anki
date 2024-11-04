@@ -5,8 +5,7 @@ import re
 # Download Takoboto deck from Anki
 INPUT_CSV = 'Takoboto_Shared_Decks.csv' # put name of downloaded file here
 MAX_ROWS_PER_FILE = 2500
-# when importing to Anki, add 'TAKOBOTO' as a tag for all cards
-
+OUTPUT_DIR = 'output' # Name of folder/directory for output CSV files
 
 with open(INPUT_CSV,'r') as csvfile:
     csv_reader = csv.reader(csvfile)
@@ -57,13 +56,16 @@ print(tags[:10])
 # Words with multiple tags shoudl only be printed to one file, doesn't matter which
 # Still include tag field in the ouput CSV files
 
+# Ensure the 'Output' directory exists
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+print("Writing to output CSV files...")
 if len(tags) == len(fronts) == len(backs):
     file_count = 1
     row_count = 0
 
     # Open the first CSV file for writing
-    file = open(f'output_{file_count}.csv', 'w', newline='')
+    file = open(os.path.join(OUTPUT_DIR, f'output_{file_count}.csv'), 'w', newline='')
     writer = csv.writer(file)
 
     for i in range(len(fronts)):
@@ -72,7 +74,7 @@ if len(tags) == len(fronts) == len(backs):
             file.close()
             file_count += 1
             row_count = 0
-            file = open(f'output_{file_count}.csv', 'w', newline='')
+            file = open(os.path.join(OUTPUT_DIR, f'output_{file_count}.csv'), 'w', newline='')
             writer = csv.writer(file)
 
         # Write the data to the file
@@ -85,3 +87,4 @@ else:
     print("Lists are not of the same length.")
 
 print("Completed.")
+# (Optional) when importing to Anki, add 'TAKOBOTO' as a tag for all cards

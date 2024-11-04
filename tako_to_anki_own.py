@@ -4,8 +4,8 @@ import re
 
 # Download in Takoboto app: Word lists > ... > Export to file... > SAVE
 INPUT_CSV = 'Takoboto.20241017-214545.csv' # put name of downloaded file here
-MAX_ROWS_PER_FILE = 1000
-# (Optional) when importing to Anki, add 'TAKOBOTO' as a tag for all cards
+MAX_ROWS_PER_FILE = 2500
+OUTPUT_DIR = 'output' # Name of folder/directory for output CSV files
 
 print("Reading information from input CSV file...")
 with open(INPUT_CSV,'r') as csvfile:
@@ -74,9 +74,9 @@ for i in range(len(tags)):
     back_contents += eng[i]
     back.append(back_contents) 
 
-#print(tags[:10])
 #print(front[:10])
 #print(back[:10])
+#print(tags[:10])
 
 # Combine the tags of duplicate entries
 combined_entries = {}
@@ -90,13 +90,16 @@ for i in range(len(front)):
 # Words with multiple tags shoudl only be printed to one file, doesn't matter which
 # Still include tag field in the ouput CSV files
 
+# Ensure the 'Output' directory exists
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 print("Writing processed information to output CSV files...")
 if len(tags) == len(front) == len(back):
     file_count = 1
     row_count = 0
 
     # Open the first CSV file for writing
-    file = open(f'output_{file_count}.csv', 'w', newline='')
+    file = open(os.path.join(OUTPUT_DIR, f'output_{file_count}.csv'), 'w', newline='')
     writer = csv.writer(file)
 
     for key in combined_entries:
@@ -105,7 +108,7 @@ if len(tags) == len(front) == len(back):
             file.close()
             file_count += 1
             row_count = 0
-            file = open(f'output_{file_count}.csv', 'w', newline='')
+            file = open(os.path.join(OUTPUT_DIR, f'output_{file_count}.csv'), 'w', newline='')
             writer = csv.writer(file)
 
         # Combine tags into a single string
@@ -120,3 +123,4 @@ else:
     print("Lists are not of the same length.")
 
 print("Completed.")
+# (Optional) when importing to Anki, add 'TAKOBOTO' as a tag for all cards
