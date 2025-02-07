@@ -9,7 +9,7 @@ import os
 # 1 - Export shared decks from app to Anki > Download Takoboto deck from Anki
 
 # Change file names to match the names of the downloaded files
-INPUT_CSV = ['Takoboto.20241101-160953.csv', 'Takoboto - Sheet1.csv'] # [0,1]
+INPUT_CSV = ['Takoboto.20241209-112739.csv', 'Book1.csv'] # [0,1]
 MAX_ROWS_PER_FILE = 2500
 OUTPUT_DIR = 'output' # Name of folder/directory for output CSV files
 
@@ -26,7 +26,7 @@ with open(INPUT_CSV[0],'r') as csvfile:
         eng_0.append(row[4])
 
 with open(INPUT_CSV[1],'r') as csvfile:
-    csv_reader = csv.reader(csvfile)
+    csv_reader = csv.reader(csvfile, delimiter=';')
 
     head_words_1 = [] # head Japanese entries, front of Anki card
     readings_1 = []
@@ -36,7 +36,12 @@ with open(INPUT_CSV[1],'r') as csvfile:
     sents_eng_1 = [] # example sentence translations
     tags_1 = []
 
+    row_num = 0
     for row in csv_reader:
+        row_num += 1
+        if row_num < 4:
+            # skip first 3 rows
+            continue
         head_words_1.append(row[0])
         readings_1.append(row[1])
         translations_1.append(row[2])
