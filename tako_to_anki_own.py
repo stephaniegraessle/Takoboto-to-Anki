@@ -1,9 +1,10 @@
+import os
 import csv
 import re
 #from  langdetect import detect
 
 # Download in Takoboto app: Word lists > ... > Export to file... > SAVE
-INPUT_CSV = 'Takoboto.20241017-214545.csv' # put name of downloaded file here
+INPUT_CSV = 'Takoboto.20250727-130016.csv' # put name of downloaded file here
 MAX_ROWS_PER_FILE = 2500
 OUTPUT_DIR = 'output' # Name of folder/directory for output CSV files
 

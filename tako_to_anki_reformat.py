@@ -1,5 +1,6 @@
 import csv
 import re
+import os
 
 # Export shared decks from app to Anki
 # Download Takoboto deck from Anki

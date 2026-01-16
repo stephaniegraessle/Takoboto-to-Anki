@@ -6,12 +6,19 @@ import os
 
 # INPUT_CSV files:
 # 0 - Download in Takoboto app: Word lists > ... > Export to file... > SAVE
-# 1 - Export shared decks from app to Anki > Download Takoboto deck from Anki
+# 1 - Export shared decks from app to Anki
+#     > Export Takoboto deck from Anki as 'Notes in plain text (.txt)'
+#     > Copy info in text file to new Excel file > Save as UTF-8 .csv file
+#       [or copy to already saved file Book1.csv]
 
 # Change file names to match the names of the downloaded files
-INPUT_CSV = ['Takoboto.20241209-112739.csv', 'Book1.csv'] # [0,1]
+INPUT_CSV = ['Takoboto.20251115-173527.csv', 'Book1.csv'] # [0,1]
 MAX_ROWS_PER_FILE = 2500
 OUTPUT_DIR = 'output' # Name of folder/directory for output CSV files
+
+def sanitize_filename(name: str) -> str:
+    cleaned = re.sub(r'[\\/*?:"<>|]', "", name)
+    return cleaned
 
 with open(INPUT_CSV[0],'r') as csvfile:
     csv_reader = csv.reader(csvfile)
@@ -184,9 +191,13 @@ if len(tags) == len(fronts) == len(backs):
     for i in range(len(fronts)):
         for tag in tags[i]:  # Each tag in the current entry
             if tag not in tag_files:
-                tag_files[tag] = open(os.path.join(OUTPUT_DIR, f'output_{tag}.csv'), 'w', newline='')
-                writer = csv.writer(tag_files[tag])
-
+                safe_tag = sanitize_filename(tag)
+                try:
+                    print(f"Writing tags to 'output_{safe_tag}.csv'")
+                    file_path = os.path.join(OUTPUT_DIR, f'output_{safe_tag}.csv')
+                    tag_files[tag] = open(file_path, 'w', newline='', encoding='utf-8-sig')
+                except:
+                    print(f"Could not write to 'output_{safe_tag}.csv'")
             # Write the data to the relevant file(s)
             writer = csv.writer(tag_files[tag])
             writer.writerow([fronts[i], backs[i], ' '.join(tags[i])])  # Include all tags in one cell
